@@ -8,10 +8,13 @@ namespace AgendaPersonala.Objects
 {
     public class Agenda
     {
-        public List<Activity> Activities;
+        public List<Activity> Activities = new List<Activity>();
         public Agenda(List<Activity> activities)
         {
-            Activities.AddRange(activities);
+            foreach (var activity in activities)
+            {
+                Activities.Add(activity);
+            }
         }
     }
 }

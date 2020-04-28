@@ -20,5 +20,46 @@ namespace AgendaPersonala.Objects
             PersonAgenda = personAgenda;
         }
 
+        public void AddActivity(Activity activity)
+        {
+            PersonAgenda.Activities.Add(activity);
+        }
+
+        public List<Activity> FindPersonActivity(string name)
+        {
+            List<Activity> foundActivities = new List<Activity>();
+            foreach (var activity in PersonAgenda.Activities)
+            {
+                if (activity.Name.Contains(name) == true) foundActivities.Add(activity);
+            }
+            return foundActivities;
+        }
+
+        public void DeletePersonActivity (string name)
+        {
+            List<Activity> foundActivities = new List<Activity>();
+            PersonAgenda.Activities.RemoveAll(x => x.Name.Contains(name));
+        }
+
+        public void DeletePersonAgenda ()
+        {
+            foreach (var activity in PersonAgenda.Activities)
+            {
+                PersonAgenda.Activities.Remove(activity);
+            }
+            PersonAgenda = null;
+        }
+
+        public List<Activity> PersonActivitiesByTimeInterval(DateTime beginningDate, DateTime endingDate)
+        {
+            List<Activity> foundActivities = new List<Activity>();
+
+            foreach (var activity in PersonAgenda.Activities)
+            {
+                if (activity.BeginningDate > beginningDate && activity.EndDate < endingDate) foundActivities.Add(activity);
+            }
+            return foundActivities;
+        }
+
     }
 }
